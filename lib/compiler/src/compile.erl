@@ -771,7 +771,8 @@ parse_module(St) ->
     Opts = St#compile.options,
     Cwd = ".",
     IncludePath = [Cwd, St#compile.dir|inc_paths(Opts)],
-    R =  epp:parse_file(St#compile.ifile, IncludePath, pre_defs(Opts)),
+    AtPos = initial_position(Opts),
+    R =  epp:parse_file(St#compile.ifile, AtPos, IncludePath, pre_defs(Opts)),
     case R of
 	{ok,Forms} ->
 	    {ok,St#compile{code=Forms}};
@@ -1428,7 +1429,7 @@ report_warnings(#compile{options=Opts,warnings=Ws0}) ->
     end.
 
 format_message(F, P, [{{Line,Column}=Loc,Mod,E}|Es]) ->
-    M = {{F,Loc},io_lib:format("~s:~w:~w ~s~s\n",
+    M = {{F,Loc},io_lib:format("~s:~w:~w: ~s~s\n",
                                 [F,Line,Column,P,Mod:format_error(E)])},
     [M|format_message(F, P, Es)];
 format_message(F, P, [{Line,Mod,E}|Es]) ->
@@ -1483,6 +1484,12 @@ objfile(Base, St) ->
 
 tmpfile(Ofile) ->
     reverse([$#|tl(reverse(Ofile))]).
+
+initial_position(Opts) ->
+    case lists:member(column, Opts) of
+        true -> {1, 1};
+        false -> 1
+    end.
 
 %% pre_defs(Options)
 %% inc_paths(Options)
