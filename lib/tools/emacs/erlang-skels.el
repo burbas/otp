@@ -453,11 +453,11 @@ Please see the function `tempo-define-template'.")
     "-export([start_link/0])." n n
 
     "%% gen_server callbacks" n
-    "-export([init/1, handle_call/3, handle_cast/2, "
+    "-export([init/1, handle_call/3, handle_cast/2,"
     "handle_info/2," n>
     "terminate/2, code_change/3])." n n
 
-    "-define(SERVER, ?MODULE). " n n
+    "-define(SERVER, ?MODULE)." n n
 
     "-record(state, {})." n n
 
@@ -569,10 +569,10 @@ Please see the function `tempo-define-template'.")
     "-export([start_link/0, add_handler/0])." n n
 
     "%% gen_event callbacks" n
-    "-export([init/1, handle_event/2, handle_call/2, " n>
+    "-export([init/1, handle_event/2, handle_call/2," n>
     "handle_info/2, terminate/2, code_change/3])." n n
 
-    "-define(SERVER, ?MODULE). " n n
+    "-define(SERVER, ?MODULE)." n n
 
     "-record(state, {})." n n
 
@@ -1005,7 +1005,7 @@ Please see the function `tempo-define-template'.")
     "%% Returns a description of the test suite when" n
     "%% Clause == doc, and a test specification (list" n
     "%% of the conf and test cases in the suite) when" n
-    "%% Clause == suite." n   
+    "%% Clause == suite." n
     "%% Returns a list of all test cases in this test suite" n
     "%%" n
     "%% Clause = doc | suite" n
@@ -1037,7 +1037,7 @@ Please see the function `tempo-define-template'.")
     (erlang-skel-separator-end 2)
     "all(doc) ->" n >
     "[\"Describe the main purpose of this suite\"];" n n
-    "all(suite) -> " n >
+    "all(suite) ->" n >
     "[a_test_case]." n n
     n
     (erlang-skel-separator-start 2)
@@ -1064,11 +1064,11 @@ Please see the function `tempo-define-template'.")
     "%% @spec TestCase(Arg) -> Descr | Spec | ok | exit() | {skip,Reason}" n
 
     (erlang-skel-separator-end 2)
-    "a_test_case(doc) -> " n >
+    "a_test_case(doc) ->" n >
     "[\"Describe the main purpose of this test case\"];" n n
-    "a_test_case(suite) -> " n >
+    "a_test_case(suite) ->" n >
     "[];" n n
-    "a_test_case(Config) when is_list(Config) -> " n >
+    "a_test_case(Config) when is_list(Config) ->" n >
     "ok." n
    )
  "*The template of a library module.
@@ -1164,14 +1164,14 @@ Please see the function `tempo-define-template'.")
     "%% TestCase = atom()" n
     "%% Reason = term()" n
     (erlang-skel-separator-end 2)
-    "all() -> " n >
+    "all() ->" n >
     "[my_test_case]." n n
 
     (erlang-skel-separator-start 2)
     "%% @spec TestCase() -> Info" n
     "%% Info = [tuple()]" n
     (erlang-skel-separator-end 2)
-    "my_test_case() -> " n >
+    "my_test_case() ->" n >
     "[]." n n
 
     (erlang-skel-separator-start 2)
@@ -1182,7 +1182,7 @@ Please see the function `tempo-define-template'.")
     "%% Reason = term()" n
     "%% Comment = term()" n
     (erlang-skel-separator-end 2)
-    "my_test_case(_Config) -> " n >
+    "my_test_case(_Config) ->" n >
     "ok." n
     )
   "*The template of a library module.
@@ -1219,7 +1219,7 @@ Please see the function `tempo-define-template'.")
     "[{timetrap,{minutes,10}}]." n n
 
     (erlang-skel-separator-start 2)
-    "%% @doc" n    
+    "%% @doc" n
     "%% Initialization before the whole suite" n
     "%%" n
     "%% Config0 = Config1 = [tuple()]" n
@@ -1340,7 +1340,7 @@ Please see the function `tempo-define-template'.")
     "[]." n n
 
     (erlang-skel-separator-start 2)
-    "%% @doc" n 
+    "%% @doc" n
     "%%  Returns the list of groups and test cases that" n
     "%%  are to be executed." n
     "%%" n
@@ -1354,7 +1354,7 @@ Please see the function `tempo-define-template'.")
     "%%" n
     "%% @spec all() -> GroupsAndTestCases | {skip,Reason}" n
     (erlang-skel-separator-end 2)
-    "all() -> " n >
+    "all() ->" n >
     "[my_test_case]." n n
 
     n
@@ -1364,7 +1364,7 @@ Please see the function `tempo-define-template'.")
     n
 
     (erlang-skel-separator-start 2)
-    "%% @doc " n
+    "%% @doc" n
     "%%  Test case info function - returns list of tuples to set" n
     "%%  properties for the test case." n
     "%%" n
@@ -1374,9 +1374,9 @@ Please see the function `tempo-define-template'.")
     "%% Note: This function is only meant to be used to return a list of" n
     "%% values, not perform any other operations." n
     "%%" n
-    "%% @spec TestCase() -> Info " n
+    "%% @spec TestCase() -> Info" n
     (erlang-skel-separator-end 2)
-    "my_test_case() -> " n >
+    "my_test_case() ->" n >
     "[]." n n
 
     (erlang-skel-separator 2)
@@ -1395,7 +1395,7 @@ Please see the function `tempo-define-template'.")
     "%%           ok | exit() | {skip,Reason} | {comment,Comment} |" n
     "%%           {save_config,Config1} | {skip_and_save,Reason,Config1}" n
     (erlang-skel-separator-end 2)
-    "my_test_case(_Config) -> " n >
+    "my_test_case(_Config) ->" n >
     "ok." n
 
     )
